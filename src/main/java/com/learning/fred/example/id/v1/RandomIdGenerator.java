@@ -10,7 +10,7 @@ import java.util.Random;
 /**
  * @author fred
  * @date 2020/11/30 10:00
- * @description todo
+ * @description v1
  */
 public class RandomIdGenerator implements IdGenerator {
 
