@@ -43,7 +43,7 @@ public class ConsoleReporter {
                     List<RequestInfo> requestInfosPerApi = entry.getValue();
 
                     //统计
-                    RequestStat requestStat = Aggregator.aggregate(requestInfosPerApi, durationInMillis);
+                    RequestStat requestStat = null;//Aggregator.aggregate(requestInfosPerApi, durationInMillis);
                     stats.put(apiName, requestStat);
                 }
 

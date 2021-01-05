@@ -1,8 +1,6 @@
 package com.learning.fred.design.metricdemo.controller.v2;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author fred
@@ -11,7 +9,7 @@ import java.util.List;
  */
 public class Aggregator {
 
-    public static RequestStat aggregate(List<RequestInfo> requestInfos, long durationInMillis) {
+    public /*static*/ RequestStat aggregate(List<RequestInfo> requestInfos, long durationInMillis) {
 
         double maxRespTime = Double.MIN_VALUE;
         double minRespTime = Double.MAX_VALUE;
@@ -77,4 +75,48 @@ public class Aggregator {
         return stat;
 
     }
+
+
+    /**
+     * v2
+     * @param requestInfos
+     * @param durationInMillis
+     * @return
+     */
+    public Map<String, RequestStat> aggregate(Map<String, List<RequestInfo>> requestInfos,
+                                              long durationInMillis) {
+        Map<String, RequestStat> requestStats = new HashMap<>();
+        for (Map.Entry<String, List<RequestInfo>> entry : requestInfos.entrySet()) {
+            String name = entry.getKey();
+            List<RequestInfo> requestInfosPerApi = entry.getValue();
+            RequestStat requestStat = doAggregate(requestInfosPerApi, durationInMillis);
+            requestStats.put(name, requestStat);
+        }
+
+        return requestStats;
+    }
+
+
+    private RequestStat doAggregate(List<RequestInfo> requestInfos, long duration) {
+        List<Double> respTimes = new ArrayList<>();
+        for (RequestInfo requestInfo : requestInfos) {
+            double respTime = requestInfo.getResponseTime();
+            respTimes.add(respTime);
+        }
+        RequestStat requestStat = new RequestStat();
+//        requestStat.setMaxResponseTime(max(respTimes));
+//        requestStat.setMinResponseTime(min(respTimes));
+//        requestStat.setAvgResponseTime(avg(respTimes));
+//        requestStat.setP999ResponseTime(percentile999(respTimes));
+//        requestStat.setP99ResponseTime(percentile99(respTimes));
+//        requestStat.setCount(respTimes.size());
+//        requestStat.setTps((long) tps(respTimes.size(), durationInMillis/1000));
+        return requestStat;
+    }
+
+
+
+
+
+
 }

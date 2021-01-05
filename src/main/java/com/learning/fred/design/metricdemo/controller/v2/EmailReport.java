@@ -32,32 +32,32 @@ public class EmailReport {
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
 
-        Date firstTime = calendar.getTime();
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                long durationInMillis = DAY_HOURS_IN_SECONDS * 1000;
-                long endTimeInMillis = System.currentTimeMillis();
-                long startTimeInMillis = endTimeInMillis - durationInMillis;
-
-                Map<String, List<RequestInfo>> requestInfos = metricsStorage.getRequestInfos(startTimeInMillis, endTimeInMillis);
-
-                Map<String, RequestStat> stats = new HashMap<>();
-
-                for (Map.Entry<String, List<RequestInfo>> entry : requestInfos.entrySet()) {
-
-                    String apiName = entry.getKey();
-                    List<RequestInfo> requestInfosPerApi = entry.getValue();
-
-                    //统计
-                    RequestStat requestStat = Aggregator.aggregate(requestInfosPerApi, durationInMillis);
-                    stats.put(apiName, requestStat);
-                }
-                //todo html 发送
-
-
-            }
-        }, firstTime, DAY_HOURS_IN_SECONDS * 1000);
+//        Date firstTime = calendar.getTime();
+//        Timer timer = new Timer();
+//        timer.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                long durationInMillis = DAY_HOURS_IN_SECONDS * 1000;
+//                long endTimeInMillis = System.currentTimeMillis();
+//                long startTimeInMillis = endTimeInMillis - durationInMillis;
+//
+//                Map<String, List<RequestInfo>> requestInfos = metricsStorage.getRequestInfos(startTimeInMillis, endTimeInMillis);
+//
+//                Map<String, RequestStat> stats = new HashMap<>();
+//
+//                for (Map.Entry<String, List<RequestInfo>> entry : requestInfos.entrySet()) {
+//
+//                    String apiName = entry.getKey();
+//                    List<RequestInfo> requestInfosPerApi = entry.getValue();
+//
+//                    //统计
+//                    RequestStat requestStat = Aggregator.aggregate(requestInfosPerApi, durationInMillis);
+//                    stats.put(apiName, requestStat);
+//                }
+//                //todo html 发送
+//
+//
+//            }
+//        }, firstTime, DAY_HOURS_IN_SECONDS * 1000);
     }
 }
