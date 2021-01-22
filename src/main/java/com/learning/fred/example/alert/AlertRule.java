@@ -6,4 +6,7 @@ package com.learning.fred.example.alert;
  * @description todo
  */
 public class AlertRule {
+    public Object getMatchedRule(String api) {
+        return null;
+    }
 }

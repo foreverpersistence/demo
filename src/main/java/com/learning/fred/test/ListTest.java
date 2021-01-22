@@ -13,6 +13,9 @@ public class ListTest {
 
     public static void main(String[] args) {
 
+//        ImmutableList.copyOf(null);
+//        Collections.unmodifiableList(null)
+
         List<String> s1 = new ArrayList<>();
         s1.add("1");
         s1.add("2");
